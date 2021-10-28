@@ -235,10 +235,11 @@ Page({
   onLoad: function (options) {
     // common.myContent(); //需要执行才能生效哈
     const deviceId = app.globalData.conct_deviceid
+    const deviceName = app.globalData.conct_name
     this.getBLEDeviceServices(deviceId) // 获取连接device信息
     this.drawCredit();
     wx.setNavigationBarTitle({
-      title: "新的设备名称",
+      title: deviceName,
     })
   },
   

@@ -1,4 +1,3 @@
-// pages/ble/ble.js
 const app = getApp()
 // 圆弧半径
 const radius = app.globalData.windowWidth_curr * 3 / 10;
@@ -51,7 +50,7 @@ Page({
     min:0,
     max:16,
     value:0,
-    buff_temp:[],
+    buff_temp:[],  // 上传的数据
     getid:'',    // 得到用户的openId
 
     //产品功能相关
@@ -59,7 +58,7 @@ Page({
     bat_index: 0, //电池电量
     qiandu_index: 1, //按摩强度
     wendu_index: 1, //加热强度
-    timeleft: 1800, //倒计时时间 秒
+    timeleft: 900, //倒计时时间 秒
     mode_slect: 0, //实时模式
     protect_time: 0, // 保护时间
     //绘图与显示相关
@@ -254,9 +253,9 @@ Page({
     this.getBLEDeviceServices(deviceId) // 获取连接device信息
     this.drawCredit();
     wx.setNavigationBarTitle({
-      title: "智能颈枕按摩器S8",
+      title: "腰部按摩仪W2",
     })
-
+    
     var _d111 = wx.getStorageSync('d111');
     _d111[0].name = _d111[0].localName //因为localName的值一直都没改变并且和name的值相等，所以每次进入之后就将localName的值赋值给name就可以了
     // !!在安卓时两者相等，在ios端就可能不相同，到时候测试然后在看解决方法
@@ -322,10 +321,10 @@ Page({
       // 画刻度
       const startNum = 0;
       // 画布旋转弧度
-      const angle = 3 * (36 / 15) * Math.PI / 180;
+      const angle = 3 * (36 / 15) * Math.PI / 90;
       ctx.save();
       ctx.rotate((-1.5 * Math.PI) + startAngle)
-      for (let i = 0; i <= 30; i++) {
+      for (let i = 0; i <= 15; i++) {
         if (i % 3 === 0) {
           //画粗刻度并写数值
           ctx.beginPath()
@@ -357,7 +356,7 @@ Page({
     function drawIndicator() {
       ctx.save();
       let sweep = 0;
-      sweep = that.data.timeleft * sweepAngle / 1800
+      sweep = that.data.timeleft * sweepAngle / 900
       // 画指示点圆弧
       const grd = ctx.createLinearGradient(0, 0, 200, 0)
       grd.addColorStop(0, 'rgba(255, 255, 255, 0.4)')
@@ -539,7 +538,6 @@ Page({
     })
   },
 
-
   // 往数据库中添加一条记录
   add_data(){
     var userInfo = wx.getStorageSync('userInfo')
@@ -562,7 +560,6 @@ Page({
       }
     })
   },
-
 
   //语音开关
   speak_on_off_ct(e) {

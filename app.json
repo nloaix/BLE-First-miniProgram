@@ -1,6 +1,7 @@
 {
   "pages": [  
     "pages/index/index",
+    "pages/ble-w2/ble-w2",
     "pages/ble/ble",  
     "pages/bleSecond/bleSecond",
     "pages/product/product",
